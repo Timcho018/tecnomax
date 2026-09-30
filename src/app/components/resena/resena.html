@@ -1,0 +1,198 @@
+<div class="bg-light py-5">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <span class="text-primary fw-bold">
+                OPINIONES
+            </span>
+
+            <h2 class="fw-bold">
+                Reseñas de nuestros clientes
+            </h2>
+
+            <p class="text-secondary">
+                Cuéntanos tu experiencia con TecnoMax
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <div class="col-lg-5">
+
+                <div class="card border-0 shadow-sm">
+
+                    <div class="card-body p-4">
+
+                        <h4 class="fw-bold mb-4">
+                            Deja tu reseña
+                        </h4>
+
+
+                        <form (submit)="guardarResena($event)">
+
+                            <div class="mb-3">
+
+                                <label for="nombre"
+                                    class="form-label fw-bold">
+
+                                    Nombre
+
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="nombre"
+                                    class="form-control"
+                                    placeholder="Ingresa tu nombre"
+                                    [formField]="resenaFormulario.nombre">
+
+
+                                @if (resenaFormulario.nombre().touched() && resenaFormulario.nombre().invalid()) {
+
+                                    @for (e of resenaFormulario.nombre().errors(); track $index) {
+
+                                        <span class="text-danger">
+                                            {{e.message}}
+                                        </span>
+
+                                    }
+
+                                }
+
+                            </div>
+
+
+                            <div class="mb-4">
+
+                                <label for="comentario"
+                                    class="form-label fw-bold">
+
+                                    Comentario
+
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="comentario"
+                                    class="form-control"
+                                    placeholder="Escribe tu opinión"
+                                    [formField]="resenaFormulario.comentario">
+
+
+                                @if (resenaFormulario.comentario().touched() && resenaFormulario.comentario().invalid()) {
+
+                                    @for (e of resenaFormulario.comentario().errors(); track $index) {
+
+                                        <span class="text-danger">
+                                            {{e.message}}
+                                        </span>
+
+                                    }
+
+                                }
+
+                            </div>
+
+
+                            <button
+                                class="btn btn-primary w-100"
+                                type="submit"
+                                [disabled]="resenaFormulario.nombre().invalid() || resenaFormulario.comentario().invalid()">
+
+                                Guardar reseña
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-7">
+
+                <div class="card border-0 shadow-sm h-100">
+
+                    <div class="card-body p-4">
+
+                        <h4 class="fw-bold mb-4">
+                            Opiniones de clientes
+                        </h4>
+
+
+                        @if (listaResenas.length == 0) {
+
+                            <div class="text-center py-5">
+
+                                <div class="fs-1">
+                                    💬
+                                </div>
+
+                                <h5 class="mt-3">
+                                    Aún no hay reseñas
+                                </h5>
+
+                                <p class="text-secondary">
+                                    Sé el primero en compartir tu opinión.
+                                </p>
+
+                            </div>
+
+                        }
+
+
+                        @if (listaResenas.length > 0) {
+
+                            <div class="table-responsive">
+
+                                <table class="table table-hover">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Cliente</th>
+                                            <th>Comentario</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        @for (resena of listaResenas; track $index) {
+
+                                            <tr>
+                                                <td class="fw-bold">
+                                                    {{resena.nombre}}
+                                                </td>
+
+                                                <td>
+                                                    {{resena.comentario}}
+                                                </td>
+                                            </tr>
+
+                                        }
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
